@@ -4,6 +4,8 @@ Lightbox for Bootstrap 3 by @ashleydw
 https://github.com/ashleydw/lightbox
 
 License: https://github.com/ashleydw/lightbox/blob/master/LICENSE
+
+Forked and modified by Westley Mon @ Mindgruve (wmarchment@mindgruve.com) to allow for custom modal markup
  */
 
 (function() {
@@ -13,24 +15,31 @@ License: https://github.com/ashleydw/lightbox/blob/master/LICENSE
   $ = jQuery;
 
   EkkoLightbox = function(element, options) {
-    var content, footer, header;
+    var content, footer, header, modal_markup;
     this.options = $.extend({
       title: null,
       footer: null,
-      remote: null
+      remote: null,
+      markup: null
     }, $.fn.ekkoLightbox.defaults, options || {});
     this.$element = $(element);
     content = '';
-    this.modal_id = this.options.modal_id ? this.options.modal_id : 'ekkoLightbox-' + Math.floor((Math.random() * 1000) + 1);
+    this.modal_id = this.options.markup ? 'lightbox-modal' : this.options.modal_id ? this.options.modal_id : 'ekkoLightbox-' + Math.floor((Math.random() * 1000) + 1);
     header = '<div class="modal-header"' + (this.options.title || this.options.always_show_close ? '' : ' style="display:none"') + '><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">' + (this.options.title || "&nbsp;") + '</h4></div>';
     footer = '<div class="modal-footer"' + (this.options.footer ? '' : ' style="display:none"') + '>' + this.options.footer + '</div>';
-    $(document.body).append('<div id="' + this.modal_id + '" class="ekko-lightbox modal fade" tabindex="-1"><div class="modal-dialog"><div class="modal-content">' + header + '<div class="modal-body"><div class="ekko-lightbox-container"><div></div></div></div>' + footer + '</div></div></div>');
+    this.modal_default_markup = '<div id="' + this.modal_id + '" class="ekko-lightbox modal fade" tabindex="-1"><div class="modal-dialog"><div class="modal-content">' + header + '<div class="modal-body"><div class="ekko-lightbox-container"><div></div></div></div>' + footer + '</div></div></div>';
+    modal_markup = this.options.markup ? this.options.markup : this.modal_default_markup;
+    $(document.body).append(modal_markup);
     this.modal = $('#' + this.modal_id);
     this.modal_dialog = this.modal.find('.modal-dialog').first();
     this.modal_content = this.modal.find('.modal-content').first();
     this.modal_body = this.modal.find('.modal-body').first();
     this.modal_header = this.modal.find('.modal-header').first();
     this.modal_footer = this.modal.find('.modal-footer').first();
+    this.lightbox_container = this.modal_body.find('.ekko-lightbox-container').first();
+    if (this.lightbox_container.length === 0) {
+      this.modal_body.append('<div class="ekko-lightbox-container"><div></div></div>');
+    }
     this.lightbox_container = this.modal_body.find('.ekko-lightbox-container').first();
     this.lightbox_body = this.lightbox_container.find('> div:first-child').first();
     this.showLoading();

@@ -30,6 +30,9 @@
 		"grunt-contrib-watch": "^0.6.1",
 		"grunt-recess": "^1.0.1"
 	},
+	"scripts": {
+		"grunt:watch": "grunt watch"
+	},
 	"npmName": "ekko-lightbox",
 	"npmFileMap": [
 		{

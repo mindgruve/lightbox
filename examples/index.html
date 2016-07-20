@@ -540,6 +540,7 @@
                 $(document).delegate('*[data-toggle="lightbox"]:not([data-gallery="navigateTo"])', 'click', function(event) {
                     event.preventDefault();
                     return $(this).ekkoLightbox({
+                        markup: '<div class="modal fade" id="lightbox-modal" tabindex="-1" role="dialog" aria-labelledby="placeholder-modalLabel" aria-hidden="true">        <div class="modal-dialog">        <div class="modal-content">        <div class="modal-header">        <div class="container">        <div class="row">        <div class="col-xs-6 hidden-xs">        <img src="/themes/theme/assets/images/logo-color.png"    srcset="/themes/theme/assets/images/logo-color.png 1x, /themes/theme/assets/images/logo-color@2x.png 2x"    alt="Logo" width="192" height="33">        </div>        <div class="col-sm-6">        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">        <span class="ss-icon ss-gizmo">&#x2421;</span>    <span class="sr-only">Close</span>        </button>        </div>        </div>        </div>        </div><!-- .modal-header -->    <div class="modal-body"></div><!-- .modal-body -->    </div><!-- /.modal-content -->    </div><!-- /.modal-dialog -->    </div><!-- /.modal -->',
                         onShown: function() {
                             if (window.console) {
                                 return console.log('Checking our the events huh?');
