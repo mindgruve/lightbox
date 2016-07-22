@@ -28,6 +28,7 @@ Forked and modified by Westley Mon @ Mindgruve (wmarchment@mindgruve.com) to all
     header = '<div class="modal-header"' + (this.options.title || this.options.always_show_close ? '' : ' style="display:none"') + '><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">' + (this.options.title || "&nbsp;") + '</h4></div>';
     footer = '<div class="modal-footer"' + (this.options.footer ? '' : ' style="display:none"') + '>' + this.options.footer + '</div>';
     this.modal_default_markup = '<div id="' + this.modal_id + '" class="ekko-lightbox modal fade" tabindex="-1"><div class="modal-dialog"><div class="modal-content">' + header + '<div class="modal-body"><div class="ekko-lightbox-container"><div></div></div></div>' + footer + '</div></div></div>';
+    this.footer_content = footer;
     modal_markup = this.options.markup ? this.options.markup : this.modal_default_markup;
     $(document.body).append(modal_markup);
     this.modal = $('#' + this.modal_id);
@@ -104,6 +105,9 @@ Forked and modified by Westley Mon @ Mindgruve (wmarchment@mindgruve.com) to all
               };
             })(this));
           }
+        }
+        if (this.options.markup) {
+          this.modal_content.append(this.footer_content);
         }
         if (this.options.type) {
           if (this.options.type === 'image') {
@@ -243,6 +247,7 @@ Forked and modified by Westley Mon @ Mindgruve (wmarchment@mindgruve.com) to all
       footer = this.modal_content.find('.modal-footer');
       title = this.$element.data('title') || "";
       caption = this.$element.data('footer') || "";
+      console.log(caption);
       if (title || this.options.always_show_close) {
         header.css('display', '').find('.modal-title').html(title || "&nbsp;");
       } else {

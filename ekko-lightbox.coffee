@@ -29,6 +29,8 @@ EkkoLightbox = (element, options) ->
 
   @modal_default_markup = '<div id="' + @modal_id + '" class="ekko-lightbox modal fade" tabindex="-1"><div class="modal-dialog"><div class="modal-content">' + header + '<div class="modal-body"><div class="ekko-lightbox-container"><div></div></div></div>' + footer + '</div></div></div>'
 
+  @footer_content = footer
+
   modal_markup = if @options.markup then @options.markup else @modal_default_markup
 
   $(document.body).append modal_markup
@@ -106,6 +108,10 @@ EkkoLightbox.prototype = {
           @lightbox_container.find('a' + @strip_spaces(@options.right_arrow_class)).on 'click', (event) =>
             event.preventDefault()
             do @navigate_right
+
+      # append footer text if using custom markup
+      if @options.markup
+        @modal_content.append @footer_content
 
       if @options.type
         if @options.type == 'image'
@@ -222,6 +228,8 @@ EkkoLightbox.prototype = {
     footer = @modal_content.find('.modal-footer')
     title = @$element.data('title') || ""
     caption = @$element.data('footer') || ""
+
+    console.log(caption)
 
     if title or @options.always_show_close then header.css('display', '').find('.modal-title').html(title || "&nbsp;") else header.css('display', 'none')
     if caption then footer.css('display', '').html(caption) else footer.css('display', 'none')
