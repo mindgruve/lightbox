@@ -247,7 +247,6 @@ Forked and modified by Westley Mon @ Mindgruve (wmarchment@mindgruve.com) to all
       footer = this.modal_content.find('.modal-footer');
       title = this.$element.data('title') || "";
       caption = this.$element.data('footer') || "";
-      console.log(caption);
       if (title || this.options.always_show_close) {
         header.css('display', '').find('.modal-title').html(title || "&nbsp;");
       } else {
