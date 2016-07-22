@@ -297,9 +297,6 @@ Forked and modified by Westley Mon @ Mindgruve (wmarchment@mindgruve.com) to all
       this.resize(width);
       this.lightbox_body.html('<div class="embed-responsive embed-responsive-16by9"><iframe width="' + width + '" height="' + height + '" src="' + url + '" frameborder="0" allowfullscreen class="embed-responsive-item"></iframe></div>');
       this.options.onContentLoaded.call(this);
-      if (this.modal_arrows) {
-        this.modal_arrows.css('display', 'none');
-      }
       return this;
     },
     loadRemoteContent: function(url) {
